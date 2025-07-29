@@ -49,6 +49,6 @@ class SteamAuthHandler
             return;
         }
 
-        header("Location: ".Host::complete()."/index.php?p=login&m=steam_failed");
+        header("Location: /login?m=steam_failed");
     }
 }

@@ -27,11 +27,11 @@ global $theme;
 new AdminTabs([], $userbank, $theme);
 
 if ($_GET['key'] != $_SESSION['banlist_postkey']) {
-    echo '<script>ShowBox("Error", "Possible hacking attempt (URL Key mismatch)!", "red", "index.php?p=admin&c=bans");</script>';
+    echo '<script>ShowBox("Error", "Possible hacking attempt (URL Key mismatch)!", "red", "/admin?c=bans");</script>';
     PageDie();
 }
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
-    echo '<script>ShowBox("Error", "No ban id specified. Please only follow links!", "red", "index.php?p=admin&c=bans");</script>';
+    echo '<script>ShowBox("Error", "No ban id specified. Please only follow links!", "red", "/admin?c=bans");</script>';
     PageDie();
 }
 
@@ -44,7 +44,7 @@ $res = $GLOBALS['db']->GetRow("
     				WHERE bid = {$_GET['id']}");
 
 if (!$userbank->HasAccess(ADMIN_OWNER | ADMIN_EDIT_ALL_BANS) && (!$userbank->HasAccess(ADMIN_EDIT_OWN_BANS) && $res[8] != $userbank->GetAid()) && (!$userbank->HasAccess(ADMIN_EDIT_GROUP_BANS) && $res->fields['gid'] != $userbank->GetProperty('gid'))) {
-    echo '<script>ShowBox("Error", "You don\'t have access to this!", "red", "index.php?p=admin&c=bans");</script>';
+    echo '<script>ShowBox("Error", "You don\'t have access to this!", "red", "/admin?c=bans");</script>';
     PageDie();
 }
 

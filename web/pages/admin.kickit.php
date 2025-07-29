@@ -37,7 +37,7 @@ function LoadServers($check, $type)
     $objResponse = new xajaxResponse();
     global $userbank, $username;
     if (!$userbank->HasAccess(ADMIN_OWNER | ADMIN_ADD_BAN)) {
-        $objResponse->redirect("index.php?p=login&m=no_access", 0);
+        $objResponse->redirect("/login?m=no_access", 0);
         Log::add("w", "Hacking Attempt", "$username tried to use the kick function, but doesnt have access.");
         return $objResponse;
     }
@@ -66,7 +66,7 @@ function KickPlayer($check, int $sid, $num, $type)
     global $userbank, $username;
 
     if (!$userbank->HasAccess(ADMIN_OWNER | ADMIN_ADD_BAN)) {
-        $objResponse->redirect("index.php?p=login&m=no_access", 0);
+        $objResponse->redirect("/login?m=no_access", 0);
         Log::add("w", "Hacking Attempt", "$username tried to process a kick, but doesnt have access.");
         return $objResponse;
     }

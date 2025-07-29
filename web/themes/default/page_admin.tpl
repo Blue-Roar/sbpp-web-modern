@@ -7,7 +7,7 @@
     <ul>
         {if $access_admins}
             <li>
-                <a href="index.php?p=admin&amp;c=admins">
+                <a href="/admin?c=admins">
                     <i class="fas fa-user fa-5x"></i>
                     <br/><br/>
                     <b>Admin Settings</b>
@@ -16,7 +16,7 @@
         {/if}
         {if $access_servers}
             <li>
-                <a href="index.php?p=admin&amp;c=servers">
+                <a href="/admin?c=servers">
                     <i class="fas fa-server fa-5x"></i>
                     <br/><br/>
                     <b>Server Settings</b>
@@ -25,7 +25,7 @@
         {/if}
         {if $access_bans}
             <li>
-                <a href="index.php?p=admin&amp;c=bans">
+                <a href="/admin?c=bans">
                     <i class="fas fa-times fa-5x"></i>
                     <br/><br/>
                     <b>Bans</b>
@@ -34,7 +34,7 @@
         {/if}
         {if $access_bans}
             <li>
-                <a href="index.php?p=admin&amp;c=comms">
+                <a href="/admin?c=comms">
                     <i class="fas fa-volume-off fa-5x"></i>
                     <br/><br/>
                     <b>Comms</b>
@@ -43,7 +43,7 @@
         {/if}
         {if $access_groups}
             <li>
-                <a href="index.php?p=admin&amp;c=groups">
+                <a href="/admin?c=groups">
                     <i class="fas fa-users fa-5x"></i>
                     <br/><br/>
                     <b>Group Settings</b>
@@ -52,7 +52,7 @@
         {/if}
         {if $access_settings}
             <li>
-                <a href="index.php?p=admin&amp;c=settings">
+                <a href="/admin?c=settings">
                     <i class="fas fa-cogs fa-5x"></i>
                     <br/><br/>
                     <b>Webpanel Settings</b>
@@ -61,7 +61,7 @@
         {/if}
         {if $access_mods}
             <li>
-                <a href="index.php?p=admin&amp;c=mods">
+                <a href="/admin?c=mods">
                     <i class="fas fa-cubes fa-5x"></i>
                     <br/><br/>
                     <b>Manage Mods</b>

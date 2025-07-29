@@ -124,9 +124,9 @@ if (isset($_POST['editadminserver'])) {
             }
         }
 
-        echo '<script>ShowRehashBox("' . implode(",", $allservers) . '", "Admin server access updated", "The admin server access has been updated successfully", "green", "index.php?p=admin&c=admins");TabToReload();</script>';
+        echo '<script>ShowRehashBox("' . implode(",", $allservers) . '", "Admin server access updated", "The admin server access has been updated successfully", "green", "/admin?c=admins");TabToReload();</script>';
     } else {
-        echo '<script>ShowBox("Admin server access updated", "The admin server access has been updated successfully", "green", "index.php?p=admin&c=admins");TabToReload();</script>';
+        echo '<script>ShowBox("Admin server access updated", "The admin server access has been updated successfully", "green", "/admin?c=admins");TabToReload();</script>';
     }
 
     $admname = $GLOBALS['db']->GetRow("SELECT user FROM `" . DB_PREFIX . "_admins` WHERE aid = ?", array(

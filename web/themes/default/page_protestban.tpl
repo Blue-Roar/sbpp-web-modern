@@ -66,3 +66,13 @@
     The staff team will be notified of your appeal. They will then review if the ban is conclusive. After reviewing you will get a reply, which usally means within 24 hours.<br />
     <b>Note:</b> Sending emails with threats to our admins, scolding or shouting will not get you unbanned and you will be permanently denied from using any of our services.
 </div>
+
+<script type="text/javascript">
+function changeType(szListValue)
+{
+    $('steam.row').style.display = (szListValue == "0" ? "" : "none");
+    $('ip.row').style.display    = (szListValue == "1" ? "" : "none");
+}
+$('Type').options[<?=$Type;?>].selected = true;
+changeType(<?=$Type?>);
+</script>

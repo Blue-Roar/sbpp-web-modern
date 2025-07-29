@@ -124,7 +124,7 @@ function CheckAdminAccess($mask)
 {
     global $userbank;
     if (!$userbank->HasAccess($mask)) {
-        header("Location: index.php?p=login&m=no_access");
+        header("Location: /login?m=no_access");
         die();
     }
 }

@@ -1,0 +1,23 @@
+.table-details td {
+    padding: .25rem .75rem;
+}
+.table-banlist tr[data-bs-toggle="collapse"],
+tr.border-bottom-0 > td {
+    border-bottom: 0 solid transparent;
+}
+
+.w-7 {
+    width: 3rem!important
+}
+.w-8 {
+    width: 5rem!important
+}
+.w-9 {
+    width: 7rem!important
+}
+.w-10 {
+    width: 8rem!important
+}
+.w-11 {
+    width: 9rem!important
+}

@@ -831,7 +831,7 @@ function search_bans()
 		input = $('ban_comment').value;
 	}
 	if(type != '' && input != '')
-		window.location = `index.php?p=banlist&advSearch=${input}&advType=${type}`;
+		window.location = `/banlist?advSearch=${input}&advType=${type}`;
 }
 
 const webSelected = new Array();
@@ -902,7 +902,7 @@ function search_admins()
 		input = $('server').value;
 	}
 	if(type != '' && input != '')
-		window.location = `index.php?p=admin&c=admins&advSearch=${input}&advType=${type}`;
+		window.location = `/admin?c=admins&advSearch=${input}&advType=${type}`;
 }
 
 function search_log()
@@ -930,7 +930,7 @@ function search_log()
 		input = $('type').value;
 	}
 	if(type != '' && input != '')
-		window.location = `index.php?p=admin&c=settings&advSearch=${input}&advType=${type}#^2`;
+		window.location = `/admin?c=settings&advSearch=${input}&advType=${type}#^2`;
 }
 
 let icname = '';
@@ -1079,7 +1079,7 @@ function ClearLogs()
 	if(noPerm == false) {
 		return;
 	}
-	window.location = 'index.php?p=admin&c=settings&log_clear=true#^2';
+	window.location = '/admin?c=settings&log_clear=true#^2';
 }
 
 function RemoveMod(name, id)
@@ -1123,27 +1123,27 @@ function changePage(newPage, type, advSearch, advType)
 	 if(nextPage != 0)
 	{
 		if(type == 'A')
-			window.location = `index.php?p=admin&c=admins${searchlink}&page=${nextPage}`;
+			window.location = `/admin?c=admins${searchlink}&page=${nextPage}`;
 		if(type == 'B')
 			window.location = `index.php?p=banlist${searchlink}&page=${nextPage}`;
 		if(type == 'C')
 			window.location = `index.php?p=commslist${searchlink}&page=${nextPage}`;
 		if(type == 'L')
-			window.location = `index.php?p=admin&c=settings${searchlink}&page=${nextPage}#^2`;
+			window.location = `/admin?c=settings${searchlink}&page=${nextPage}#^2`;
 		if(type == 'P')
-			window.location = `index.php?p=admin&c=bans&ppage=${nextPage}#^1`;
+			window.location = `/admin?c=bans&ppage=${nextPage}#^1`;
 		if(type == 'PA')
-			window.location = `index.php?p=admin&c=bans&papage=${nextPage}#^1~p1`;
+			window.location = `/admin?c=bans&papage=${nextPage}#^1~p1`;
 		if(type == 'S')
-			window.location = `index.php?p=admin&c=bans&spage=${nextPage}#^2`;
+			window.location = `/admin?c=bans&spage=${nextPage}#^2`;
 		if(type == 'SA')
-			window.location = `index.php?p=admin&c=bans&sapage=${nextPage}#^2~s1`;
+			window.location = `/admin?c=bans&sapage=${nextPage}#^2~s1`;
 	 }
 }
 
 function ShowKickBox(check, type)
 {
-	ShowBox('Ban Added', `The ban has been successfully added<br><iframe id="srvkicker" frameborder="0" width="100%" src="pages/admin.kickit.php?check=${check}&type=${type}"></iframe>`, 'green', 'index.php?p=admin&c=bans', true);
+	ShowBox('Ban Added', `The ban has been successfully added<br><iframe id="srvkicker" frameborder="0" width="100%" src="pages/admin.kickit.php?check=${check}&type=${type}"></iframe>`, 'green', '/admin?c=bans', true);
 }
 
 function ShowRehashBox(servers, title, msg, color, redir)
@@ -1446,12 +1446,12 @@ function search_blocks()
 		input = $('ban_comment').value;
 	}
 	if(type != '' && input != '')
-		window.location = `index.php?p=commslist&advSearch=${input}&advType=${type}`;
+		window.location = `/commslist?advSearch=${input}&advType=${type}`;
 }
 
 function ShowBlockBox(check, type, length)
 {
-	ShowBox('Block Added', `The block has been successfully added<br><iframe id="srvkicker" frameborder="0" width="100%" src="pages/admin.blockit.php?check=${check}&type=${type}&length=${length}"></iframe>`, 'green', 'index.php?p=admin&c=comms', true);
+	ShowBox('Block Added', `The block has been successfully added<br><iframe id="srvkicker" frameborder="0" width="100%" src="pages/admin.blockit.php?check=${check}&type=${type}&length=${length}"></iframe>`, 'green', '/admin?c=comms', true);
 }
 
 function openTab(event, target) {

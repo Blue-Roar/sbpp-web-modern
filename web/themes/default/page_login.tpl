@@ -23,7 +23,7 @@
                 </div>
                 -{/if}-
                 <div id="loginSubmit">
-                    <center><a href="index.php?p=login&o=steam"><img src="images/steamlogin.png"></a></center>
+                    <center><a href="/login?o=steam"><img src="images/steamlogin.png"></a></center>
                     <br>
                     -{if $steamlogin_show == 1}-
                     -{sb_button text="Login" onclick=$redir class="ok login" id="alogin" style="width: 100%; text-transform: uppercase;" submit=false}-

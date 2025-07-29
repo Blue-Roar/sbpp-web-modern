@@ -158,7 +158,7 @@ if (!isset($_POST['subprotest']) || $_POST['subprotest'] != 1) {
                 '{steamid}' => $_POST['SteamID'],
                 '{banadmin}' => $protadmin['user'],
                 '{message}' => $_POST['BanReason'],
-                '{link}' => Host::complete(true) . '/index.php?p=admin&c=bans#%5E1',
+                '{link}' => Host::complete(true) . '/admin?c=bans#%5E1',
                 '{home}' => Host::complete(true)
             ]);
         }
@@ -175,12 +175,3 @@ $theme->assign('player_email', $Email);
 
 $theme->display('page_protestban.tpl');
 ?>
-<script type="text/javascript">
-function changeType(szListValue)
-{
-    $('steam.row').style.display = (szListValue == "0" ? "" : "none");
-    $('ip.row').style.display    = (szListValue == "1" ? "" : "none");
-}
-$('Type').options[<?=$Type;?>].selected = true;
-changeType(<?=$Type?>);
-</script>

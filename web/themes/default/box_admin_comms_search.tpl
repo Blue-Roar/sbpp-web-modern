@@ -153,3 +153,17 @@
 </div>
 {$server_script}
 <script>InitAccordion('tr.sea_open', 'div.panel', 'mainwrapper');</script>
+<script type="text/javascript">
+function switch_length(opt)
+{
+    if(opt.options[opt.selectedIndex].value=='other')
+    {
+        $('other_length').setStyle('display', 'block');
+        $('other_length').focus();
+        $('length').setStyle('width', '20px');
+    } else {
+        $('other_length').setStyle('display', 'none');
+        $('length').setStyle('width', '210px');
+    }
+}
+</script>

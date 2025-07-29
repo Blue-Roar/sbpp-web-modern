@@ -26,13 +26,13 @@ global $userbank, $theme;
 
 // Check if the user is already logged in
 if ($userbank->is_logged_in()) {
-    echo "<script>window.location.href = 'index.php';</script>"; // Redirect to the main page using JavaScript
+    echo "<script>window.location.href = '/';</script>"; // Redirect to the main page using JavaScript
     exit;
 }
 
 // Handle messages based on query parameters
 if (isset($_GET['m'])) {
-    $lostpassword_url = Host::complete() . '/index.php?p=lostpassword';
+    $lostpassword_url = '/lostpassword';
     switch ($_GET['m']) {
         case 'no_access':
             echo <<<HTML
@@ -104,7 +104,7 @@ HTML;
 }
 
 $theme->assign('steamlogin_show', Config::getBool('config.enablesteamlogin'));
-$theme->assign('redir', "DoLogin('');");
+$theme->assign('redir', "DoLogin();");
 $theme->setLeftDelimiter("-{");
 $theme->setRightDelimiter("}-");
 $theme->display('page_login.tpl');

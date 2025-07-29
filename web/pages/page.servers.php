@@ -43,7 +43,7 @@ while (!$res->EOF) {
     $info['icon']  = $res->fields[5];
     $info['index'] = $i;
     if (defined('IN_HOME')) {
-        $info['evOnClick'] = "window.location = 'index.php?p=servers&s=" . $info['index'] . "';";
+        $info['evOnClick'] = "window.location = '/servers?s=" . $info['index'] . "';";
     }
 
     $GLOBALS['server_qry'] .= "xajax_ServerHostPlayers({$info['sid']}, 'servers', '', '" . $i . "', '" . $number . "', '" . defined('IN_HOME') . "', 70);";

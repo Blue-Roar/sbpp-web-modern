@@ -856,7 +856,7 @@ class xajax
 	function getJavascriptConfig()
 	{
 		$html  = "\t<script type=\"text/javascript\">\n";
-		$html .= "var xajaxRequestUri=\"".$this->sRequestURI."\";\n";
+		$html .= "var xajaxRequestUri=\"/\";\n";
 		$html .= "var xajaxDebug=".($this->bDebug?"true":"false").";\n";
 		$html .= "var xajaxStatusMessages=".($this->bStatusMessages?"true":"false").";\n";
 		$html .= "var xajaxWaitCursor=".($this->bWaitCursor?"true":"false").";\n";
@@ -895,7 +895,7 @@ class xajax
 			
 		if ($sJsURI != "" && substr($sJsURI, -1) != "/") $sJsURI .= "/";
 		
-		$html = "\t<script type=\"text/javascript\" src=\"" . $sJsURI . $sJsFile . "\"></script>\n";
+		$html = "\t<script type=\"text/javascript\" src=\"/" . $sJsURI . $sJsFile . "\"></script>\n";
 		if ($this->iTimeout != 0)
 		{
 			$html .= "\t<script type=\"text/javascript\">\n";

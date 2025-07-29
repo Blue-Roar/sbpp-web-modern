@@ -123,10 +123,10 @@ echo '<div id="tabsWrapper" style="margin:0px;">
     <div id="tabs">
 	<ul>
 		<li id="utab-p0" class="active">
-			<a href="index.php?p=admin&c=bans#^1~p0" id="admin_utab_p0" onclick="Swap2ndPane(0,\'p\');" class="tip" title="Show Protests :: Show current protests." target="_self">Current</a>
+			<a href="/admin?c=bans#^1~p0" id="admin_utab_p0" onclick="Swap2ndPane(0,\'p\');" class="tip" title="Show Protests :: Show current protests." target="_self">Current</a>
 		</li>
 		<li id="utab-p1" class="nonactive">
-			<a href="index.php?p=admin&c=bans#^1~p1" id="admin_utab_p1" onclick="Swap2ndPane(1,\'p\');" class="tip" title="Show Archive :: Show the protest archive." target="_self">Archive</a>
+			<a href="/admin?c=bans#^1~p1" id="admin_utab_p1" onclick="Swap2ndPane(1,\'p\');" class="tip" title="Show Archive :: Show the protest archive." target="_self">Archive</a>
 		</li>
 	</ul>
 	</div>
@@ -147,17 +147,17 @@ if ($PageEnd > $page_count) {
     $PageEnd = $page_count;
 }
 if ($page > 1) {
-    $prev = CreateLinkR('<i class="fas fa-arrow-left fa-lg"></i> prev', "index.php?p=admin&c=bans&ppage=" . ($page - 1) . "#^1");
+    $prev = CreateLinkR('<i class="fas fa-arrow-left fa-lg"></i> prev', "/admin?c=bans&ppage=" . ($page - 1) . "#^1");
 } else {
     $prev = "";
 }
 if ($PageEnd < $page_count) {
-    $next = CreateLinkR('next <i class="fas fa-arrow-right fa-lg"></i>', "index.php?p=admin&c=bans&ppage=" . ($page + 1) . "#^1");
+    $next = CreateLinkR('next <i class="fas fa-arrow-right fa-lg"></i>', "/admin?c=bans&ppage=" . ($page + 1) . "#^1");
 } else {
     $next = "";
 }
 
-$page_nav = 'displaying&nbsp;' . $PageStart . '&nbsp;-&nbsp;' . $PageEnd . '&nbsp;of&nbsp;' . $page_count . '&nbsp;results';
+$page_nav = 'Displaying&nbsp;' . ($PageStart+1) . '&nbsp;-&nbsp;' . $PageEnd . '&nbsp;of&nbsp;' . $page_count . '&nbsp;results';
 
 if (strlen($prev) > 0) {
     $page_nav .= ' | <b>' . $prev . '</b>';
@@ -228,7 +228,7 @@ foreach ($protests as $prot) {
             $cdata            = [];
             $cdata['morecom'] = ($morecom == 1 ? true : false);
             if ($commentres->fields['aid'] == $userbank->GetAid() || $userbank->HasAccess(ADMIN_OWNER)) {
-                $cdata['editcomlink'] = CreateLinkR('<i class="fas fa-edit fa-lg"></i>', 'index.php?p=banlist&comment=' . (int) $prot['pid'] . '&ctype=P&cid=' . $commentres->fields['cid'], 'Edit Comment');
+                $cdata['editcomlink'] = CreateLinkR('<i class="fas fa-edit fa-lg"></i>', '/banlist?comment=' . (int) $prot['pid'] . '&ctype=P&cid=' . $commentres->fields['cid'], 'Edit Comment');
                 if ($userbank->HasAccess(ADMIN_OWNER)) {
                     $cdata['delcomlink'] = "<a href=\"#\" class=\"tip\" title=\"Delete Comment\" target=\"_self\" onclick=\"RemoveComment(" . $commentres->fields['cid'] . ",'P',-1);\"><i class='fas fa-trash fa-lg'></i></a>";
                 }
@@ -261,7 +261,7 @@ foreach ($protests as $prot) {
     }
 
     $prot['commentdata']    = $comment;
-    $prot['protaddcomment'] = CreateLinkR('<i class="fas fa-comment-dots fa-lg"></i> Add Comment', 'index.php?p=banlist&comment=' . (int) $prot['pid'] . '&ctype=P');
+    $prot['protaddcomment'] = CreateLinkR('<i class="fas fa-comment-dots fa-lg"></i> Add Comment', '/banlist?comment=' . (int) $prot['pid'] . '&ctype=P');
     //-----------------------------------------
 
     array_push($protest_list, $prot);
@@ -298,17 +298,17 @@ if ($PageEnd > $page_count) {
     $PageEnd = $page_count;
 }
 if ($page > 1) {
-    $prev = CreateLinkR('<i class="fas fa-arrow-left fa-lg"></i> prev', "index.php?p=admin&c=bans&papage=" . ($page - 1) . "#^1~p1");
+    $prev = CreateLinkR('<i class="fas fa-arrow-left fa-lg"></i> prev', "/admin?c=bans&papage=" . ($page - 1) . "#^1~p1");
 } else {
     $prev = "";
 }
 if ($PageEnd < $page_count) {
-    $next = CreateLinkR('next <i class="fas fa-arrow-right fa-lg"></i>', "index.php?p=admin&c=bans&papage=" . ($page + 1) . "#^1~p1");
+    $next = CreateLinkR('next <i class="fas fa-arrow-right fa-lg"></i>', "/admin?c=bans&papage=" . ($page + 1) . "#^1~p1");
 } else {
     $next = "";
 }
 
-$page_nav = 'displaying&nbsp;' . $PageStart . '&nbsp;-&nbsp;' . $PageEnd . '&nbsp;of&nbsp;' . $page_count . '&nbsp;results';
+$page_nav = 'Displaying&nbsp;' . ($PageStart+1) . '&nbsp;-&nbsp;' . $PageEnd . '&nbsp;of&nbsp;' . $page_count . '&nbsp;results';
 
 if (strlen($prev) > 0) {
     $page_nav .= ' | <b>' . $prev . '</b>';
@@ -391,7 +391,7 @@ foreach ($protestsarchiv as $prot) {
             $cdata            = [];
             $cdata['morecom'] = ($morecom == 1 ? true : false);
             if ($commentres->fields['aid'] == $userbank->GetAid() || $userbank->HasAccess(ADMIN_OWNER)) {
-                $cdata['editcomlink'] = CreateLinkR('<i class="fas fa-edit fa-lg"></i>', 'index.php?p=banlist&comment=' . (int) $prot['pid'] . '&ctype=P&cid=' . $commentres->fields['cid'], 'Edit Comment');
+                $cdata['editcomlink'] = CreateLinkR('<i class="fas fa-edit fa-lg"></i>', '/banlist?comment=' . (int) $prot['pid'] . '&ctype=P&cid=' . $commentres->fields['cid'], 'Edit Comment');
                 if ($userbank->HasAccess(ADMIN_OWNER)) {
                     $cdata['delcomlink'] = "<a href=\"#\" class=\"tip\" title=\"Delete Comment\" target=\"_self\" onclick=\"RemoveComment(" . $commentres->fields['cid'] . ",'P',-1);\"><i class='fas fa-trash fa-lg'></i></a>";
                 }
@@ -424,7 +424,7 @@ foreach ($protestsarchiv as $prot) {
     }
 
     $prot['commentdata']    = $comment;
-    $prot['protaddcomment'] = CreateLinkR('<i class="fas fa-comment-dots fa-lg"></i> Add Comment', 'index.php?p=banlist&comment=' . (int) $prot['pid'] . '&ctype=P');
+    $prot['protaddcomment'] = CreateLinkR('<i class="fas fa-comment-dots fa-lg"></i> Add Comment', '/banlist?comment=' . (int) $prot['pid'] . '&ctype=P');
     //-----------------------------------------
 
     array_push($protest_list_archiv, $prot);
@@ -447,10 +447,10 @@ echo '<div id="tabsWrapper" style="margin:0px;">
     <div id="tabs">
 	<ul>
 		<li id="utab-s0" class="active">
-			<a href="index.php?p=admin&c=bans#^2~s0" id="admin_utab_s0" onclick="Swap2ndPane(0,\'s\');" class="tip" title="Show Submissions :: Show current submissions." target="_self">Current</a>
+			<a href="/admin?c=bans#^2~s0" id="admin_utab_s0" onclick="Swap2ndPane(0,\'s\');" class="tip" title="Show Submissions :: Show current submissions." target="_self">Current</a>
 		</li>
 		<li id="utab-s1" class="nonactive">
-			<a href="index.php?p=admin&c=bans#^2~s1" id="admin_utab_s1" onclick="Swap2ndPane(1,\'s\');" class="tip" title="Show Archive :: Show the submission archive." target="_self">Archive</a>
+			<a href="/admin?c=bans#^2~s1" id="admin_utab_s1" onclick="Swap2ndPane(1,\'s\');" class="tip" title="Show Archive :: Show the submission archive." target="_self">Archive</a>
 		</li>
 	</ul>
 	</div>
@@ -470,17 +470,17 @@ if ($PageEnd > $page_count) {
     $PageEnd = $page_count;
 }
 if ($page > 1) {
-    $prev = CreateLinkR('<i class="fas fa-arrow-left fa-lg"></i> prev', "index.php?p=admin&c=bans&spage=" . ($page - 1) . "#^2");
+    $prev = CreateLinkR('<i class="fas fa-arrow-left fa-lg"></i> prev', "/admin?c=bans&spage=" . ($page - 1) . "#^2");
 } else {
     $prev = "";
 }
 if ($PageEnd < $page_count) {
-    $next = CreateLinkR('next <i class="fas fa-arrow-right fa-lg"></i>', "index.php?p=admin&c=bans&spage=" . ($page + 1) . "#^2");
+    $next = CreateLinkR('next <i class="fas fa-arrow-right fa-lg"></i>', "/admin?c=bans&spage=" . ($page + 1) . "#^2");
 } else {
     $next = "";
 }
 
-$page_nav = 'displaying&nbsp;' . $PageStart . '&nbsp;-&nbsp;' . $PageEnd . '&nbsp;of&nbsp;' . $page_count . '&nbsp;results';
+$page_nav = 'Displaying&nbsp;' . ($PageStart+1) . '&nbsp;-&nbsp;' . $PageEnd . '&nbsp;of&nbsp;' . $page_count . '&nbsp;results';
 
 if (strlen($prev) > 0) {
     $page_nav .= ' | <b>' . $prev . '</b>';
@@ -547,7 +547,7 @@ foreach ($submissions as $sub) {
             $cdata            = [];
             $cdata['morecom'] = ($morecom == 1 ? true : false);
             if ($commentres->fields['aid'] == $userbank->GetAid() || $userbank->HasAccess(ADMIN_OWNER)) {
-                $cdata['editcomlink'] = CreateLinkR('<i class="fas fa-edit fa-lg"></i>', 'index.php?p=banlist&comment=' . (int) $sub['subid'] . '&ctype=S&cid=' . $commentres->fields['cid'], 'Edit Comment');
+                $cdata['editcomlink'] = CreateLinkR('<i class="fas fa-edit fa-lg"></i>', '/banlist?comment=' . (int) $sub['subid'] . '&ctype=S&cid=' . $commentres->fields['cid'], 'Edit Comment');
                 if ($userbank->HasAccess(ADMIN_OWNER)) {
                     $cdata['delcomlink'] = "<a href=\"#\" class=\"tip\" title=\"Delete Comment\" target=\"_self\" onclick=\"RemoveComment(" . $commentres->fields['cid'] . ",'S',-1);\"><i class='fas fa-trash fa-lg'></i></a>";
                 }
@@ -581,7 +581,7 @@ foreach ($submissions as $sub) {
     }
 
     $sub['commentdata']   = $comment;
-    $sub['subaddcomment'] = CreateLinkR('<i class="fas fa-comment-dots fa-lg"></i> Add Comment', 'index.php?p=banlist&comment=' . (int) $sub['subid'] . '&ctype=S');
+    $sub['subaddcomment'] = CreateLinkR('<i class="fas fa-comment-dots fa-lg"></i> Add Comment', '/banlist?comment=' . (int) $sub['subid'] . '&ctype=S');
     //----------------------------------------
 
     array_push($submission_list, $sub);
@@ -607,17 +607,17 @@ if ($PageEnd > $page_count) {
     $PageEnd = $page_count;
 }
 if ($page > 1) {
-    $prev = CreateLinkR('<i class="fas fa-arrow-left fa-lg"></i> prev', "index.php?p=admin&c=bans&sapage=" . ($page - 1) . "#^2~s1");
+    $prev = CreateLinkR('<i class="fas fa-arrow-left fa-lg"></i> prev', "/admin?c=bans&sapage=" . ($page - 1) . "#^2~s1");
 } else {
     $prev = "";
 }
 if ($PageEnd < $page_count) {
-    $next = CreateLinkR('next <i class="fas fa-arrow-right fa-lg"></i>', "index.php?p=admin&c=bans&sapage=" . ($page + 1) . "#^2~s1");
+    $next = CreateLinkR('next <i class="fas fa-arrow-right fa-lg"></i>', "/admin?c=bans&sapage=" . ($page + 1) . "#^2~s1");
 } else {
     $next = "";
 }
 
-$page_nav = 'displaying&nbsp;' . $PageStart . '&nbsp;-&nbsp;' . $PageEnd . '&nbsp;of&nbsp;' . $page_count . '&nbsp;results';
+$page_nav = 'Displaying&nbsp;' . ($PageStart+1) . '&nbsp;-&nbsp;' . $PageEnd . '&nbsp;of&nbsp;' . $page_count . '&nbsp;results';
 
 if (strlen($prev) > 0) {
     $page_nav .= ' | <b>' . $prev . '</b>';
@@ -690,7 +690,7 @@ foreach ($submissionsarchiv as $sub) {
             $cdata            = [];
             $cdata['morecom'] = ($morecom == 1 ? true : false);
             if ($commentres->fields['aid'] == $userbank->GetAid() || $userbank->HasAccess(ADMIN_OWNER)) {
-                $cdata['editcomlink'] = CreateLinkR('<i class="fas fa-edit fa-lg"></i>', 'index.php?p=banlist&comment=' . (int) $sub['subid'] . '&ctype=S&cid=' . $commentres->fields['cid'], 'Edit Comment');
+                $cdata['editcomlink'] = CreateLinkR('<i class="fas fa-edit fa-lg"></i>', '/banlist?comment=' . (int) $sub['subid'] . '&ctype=S&cid=' . $commentres->fields['cid'], 'Edit Comment');
                 if ($userbank->HasAccess(ADMIN_OWNER)) {
                     $cdata['delcomlink'] = "<a href=\"#\" class=\"tip\" title=\"Delete Comment\" target=\"_self\" onclick=\"RemoveComment(" . $commentres->fields['cid'] . ",'S',-1);\"><i class='fas fa-trash fa-lg'></i></a>";
                 }
@@ -724,7 +724,7 @@ foreach ($submissionsarchiv as $sub) {
     }
 
     $sub['commentdata']   = $comment;
-    $sub['subaddcomment'] = CreateLinkR('<i class="fas fa-comment-dots fa-lg"></i> Add Comment', 'index.php?p=banlist&comment=' . (int) $sub['subid'] . '&ctype=S');
+    $sub['subaddcomment'] = CreateLinkR('<i class="fas fa-comment-dots fa-lg"></i> Add Comment', '/banlist?comment=' . (int) $sub['subid'] . '&ctype=S');
     //----------------------------------------
 
     array_push($submission_list_archiv, $sub);

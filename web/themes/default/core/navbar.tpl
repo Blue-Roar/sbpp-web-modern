@@ -11,7 +11,7 @@
             <div id="nav">
                 {if $isAdmin}
                     {foreach from=$adminbar item=admin}
-                        <a class="nav_link {$admin.state}" href="index.php?p=admin&c={$admin.endpoint}">{$admin.title}</a>
+                        <a class="nav_link {$admin.state}" href="/admin?c={$admin.endpoint}">{$admin.title}</a>
                     {/foreach}
                 {/if}
             </div>

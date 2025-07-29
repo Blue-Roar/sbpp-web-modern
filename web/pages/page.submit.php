@@ -184,7 +184,7 @@ if (!isset($_POST['subban']) || $_POST['subban'] != 1) {
                     '{server}' => $mailserver,
                     '{reason}' => $_POST['BanReason'],
                     '{home}' => Host::complete(true),
-                    '{link}' => Host::complete(true) . '/index.php?p=admin&c=bans#%5E2'
+                    '{link}' => Host::complete(true) . '/admin?c=bans#%5E2'
                 ]);
             }
 

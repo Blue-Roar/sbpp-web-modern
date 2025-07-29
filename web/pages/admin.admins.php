@@ -180,18 +180,18 @@ foreach ($admins as $admin) {
 }
 
 if ($page > 1) {
-    $prev = CreateLinkR('<i class="fas fa-arrow-left fa-lg"></i> prev', "index.php?p=admin&c=admins&page=" . ($page - 1) . $advSearchString);
+    $prev = CreateLinkR('<i class="fas fa-arrow-left fa-lg"></i> prev', "/admin?c=admins&page=" . ($page - 1) . $advSearchString);
 } else {
     $prev = "";
 }
 if ($AdminsEnd < $admin_count) {
-    $next = CreateLinkR('next <i class="fas fa-arrow-right fa-lg"></i>', "index.php?p=admin&c=admins&page=" . ($page + 1) . $advSearchString);
+    $next = CreateLinkR('next <i class="fas fa-arrow-right fa-lg"></i>', "/admin?c=admins&page=" . ($page + 1) . $advSearchString);
 } else {
     $next = "";
 }
 
 //=================[ Start Layout ]==================================
-$admin_nav = 'displaying&nbsp;' . $AdminsStart . '&nbsp;-&nbsp;' . $AdminsEnd . '&nbsp;of&nbsp;' . $admin_count . '&nbsp;results';
+$admin_nav = 'Displaying&nbsp;' . ($AdminsStart+1) . '&nbsp;-&nbsp;' . $AdminsEnd . '&nbsp;of&nbsp;' . $admin_count . '&nbsp;results';
 
 if (strlen($prev) > 0) {
     $admin_nav .= ' | <b>' . $prev . '</b>';

@@ -155,7 +155,7 @@ if (isset($_POST['address'])) {
             );
         }
 
-        echo "<script>ShowBox('Server updated', 'The server has been updated successfully', 'green', 'index.php?p=admin&c=servers');TabToReload();</script>";
+        echo "<script>ShowBox('Server updated', 'The server has been updated successfully', 'green', '/admin?c=servers');TabToReload();</script>";
     }
 }
 

@@ -469,14 +469,17 @@ while (!$res->EOF) {
     switch ((int) $data['type']) {
         case 1:
             $data['type_icon'] = '<i class="fas fa-microphone-slash fa-lg"></i>';
+            $data['type_icon_class'] = 'fas fa-microphone-slash';
             $mute_count        = $mute_count - 1;
             break;
         case 2:
             $data['type_icon'] = '<i class="fas fa-comment-slash fa-lg"></i>';
+            $data['type_icon_class'] = 'fas fa-comment-slash';
             $gag_count         = $gag_count - 1;
             break;
         default:
-            $data['type_icon'] = '<img src="images/country/zz.png" alt="Unknown block type" border="0" align="absmiddle" />';
+            $data['type_icon'] = '<i class="fas fa-question fa-lg"></i>';
+            $data['type_icon_class'] = 'fas fa-question';
             break;
     }
 
@@ -555,10 +558,12 @@ while (!$res->EOF) {
     if ($alrdybnd->fields['count'] == 0) {
         switch ($data['type']) {
             case 1:
-                $data['reban_link'] = CreateLinkR('<i class="fas fa-redo fa-lg"></i> ReMute', "index.php?p=admin&c=comms" . $pagelink . "&rebanid=" . $res->fields['ban_id'] . "&key=" . $_SESSION['banlist_postkey'] . "#^0");
+                $data['reban_link'] = CreateLinkR('<i class="fas fa-redo fa-lg"></i> ReMute', "/admin?c=comms" . $pagelink . "&rebanid=" . $res->fields['ban_id'] . "&key=" . $_SESSION['banlist_postkey'] . "#^0");
+                $data['reban_link_href'] = "/admin?c=comms" . $pagelink . "&rebanid=" . $res->fields['ban_id'] . "&key=" . $_SESSION['banlist_postkey'] . "#^0";
                 break;
             case 2:
-                $data['reban_link'] = CreateLinkR('<i class="fas fa-redo fa-lg"></i> ReGag', "index.php?p=admin&c=comms" . $pagelink . "&rebanid=" . $res->fields['ban_id'] . "&key=" . $_SESSION['banlist_postkey'] . "#^0");
+                $data['reban_link'] = CreateLinkR('<i class="fas fa-redo fa-lg"></i> ReGag', "/admin?c=comms" . $pagelink . "&rebanid=" . $res->fields['ban_id'] . "&key=" . $_SESSION['banlist_postkey'] . "#^0");
+                $data['reban_link_href'] = "/admin?c=comms" . $pagelink . "&rebanid=" . $res->fields['ban_id'] . "&key=" . $_SESSION['banlist_postkey'] . "#^0";
                 break;
             default:
                 break;
@@ -568,20 +573,24 @@ while (!$res->EOF) {
     }
 
 
-    $data['edit_link'] = CreateLinkR('<i class="fas fa-edit fa-lg"></i> Edit Details', "index.php?p=admin&c=comms&o=edit" . $pagelink . "&id=" . $res->fields['ban_id'] . "&key=" . $_SESSION['banlist_postkey']);
+    $data['edit_link'] = CreateLinkR('<i class="fas fa-edit fa-lg"></i> Edit Details', "/admin?c=comms&o=edit" . $pagelink . "&id=" . $res->fields['ban_id'] . "&key=" . $_SESSION['banlist_postkey']);
+    $data['edit_link_href'] = "/admin?c=comms&o=edit" . $pagelink . "&id=" . $res->fields['ban_id'] . "&key=" . $_SESSION['banlist_postkey'];
 
     switch ($data['type']) {
         case 2:
             $data['unban_link'] = CreateLinkR('<i class="fas fa-undo fa-lg"></i> UnGag', "#", "", "_self", false, "UnGag('" . $res->fields['ban_id'] . "', '" . $_SESSION['banlist_postkey'] . "', '" . $pagelink . "', '" . $data['player'] . "', 1);return false;");
+            $data['unban_link_onclick'] = "UnGag('" . $res->fields['ban_id'] . "', '" . $_SESSION['banlist_postkey'] . "', '" . $pagelink . "', '" . $data['player'] . "', 1);return false;";
             break;
         case 1:
             $data['unban_link'] = CreateLinkR('<i class="fas fa-undo fa-lg"></i> UnMute', "#", "", "_self", false, "UnMute('" . $res->fields['ban_id'] . "', '" . $_SESSION['banlist_postkey'] . "', '" . $pagelink . "', '" . $data['player'] . "', 1);return false;");
+            $data['unban_link_onclick'] = "UnMute('" . $res->fields['ban_id'] . "', '" . $_SESSION['banlist_postkey'] . "', '" . $pagelink . "', '" . $data['player'] . "', 1);return false;";
             break;
         default:
             break;
     }
 
     $data['delete_link'] = CreateLinkR('<i class="fas fa-trash fa-lg"></i> Delete Block', "#", "", "_self", false, "RemoveBlock('" . $res->fields['ban_id'] . "', '" . $_SESSION['banlist_postkey'] . "', '" . $pagelink . "', '" . $data['player'] . "', 0);return false;");
+    $data['delete_link_onclick'] = "RemoveBlock('" . $res->fields['ban_id'] . "', '" . $_SESSION['banlist_postkey'] . "', '" . $pagelink . "', '" . $data['player'] . "', 0);return false;";
 
     $data['server_id'] = $res->fields['ban_server'];
 
@@ -591,10 +600,11 @@ while (!$res->EOF) {
         $modicon = $res->fields['mod_icon'];
     }
 
+    $data['mod_icon_url'] = "images/games/" . $modicon;
     $data['mod_icon'] = '<img src="images/games/' . $modicon . '" alt="MOD" border="0" align="absmiddle" />&nbsp;' . $data['type_icon'];
 
     if ($history_count > 1) {
-        $data['prevoff_link'] = $history_count . " " . CreateLinkR("&nbsp;(search)", "index.php?p=commslist&searchText=" . $data['steamid'] . "&Submit");
+        $data['prevoff_link'] = $history_count . " " . CreateLinkR("&nbsp;(search)", "/commslist?searchText=" . $data['steamid'] . "&Submit");
     } else {
         $data['prevoff_link'] = "No previous blocks";
     }
@@ -633,7 +643,7 @@ while (!$res->EOF) {
                 $cdata            = [];
                 $cdata['morecom'] = ($morecom == 1 ? true : false);
                 if ($commentres->fields['aid'] == $userbank->GetAid() || $userbank->HasAccess(ADMIN_OWNER)) {
-                    $cdata['editcomlink'] = CreateLinkR('<i class="fas fa-edit fa-lg"></i>', 'index.php?p=commslist&comment=' . $data['ban_id'] . '&ctype=C&cid=' . $commentres->fields['cid'] . $pagelink, 'Edit Comment');
+                    $cdata['editcomlink'] = CreateLinkR('<i class="fas fa-edit fa-lg"></i>', '/commslist?comment=' . $data['ban_id'] . '&ctype=C&cid=' . $commentres->fields['cid'] . $pagelink, 'Edit Comment');
                     if ($userbank->HasAccess(ADMIN_OWNER)) {
                         $cdata['delcomlink'] = "<a href=\"#\" class=\"tip\" title=\"Delete Comment\" target=\"_self\" onclick=\"RemoveComment(" . $commentres->fields['cid'] . ",'C'," . (isset($_GET["page"]) ? $_GET["page"] : -1) . ");\"><i class='fas fa-trash fa-lg'></i></a>";
                     }
@@ -669,7 +679,8 @@ while (!$res->EOF) {
         $data['commentdata'] = $comment;
     }
 
-    $data['addcomment'] = CreateLinkR('<i class="fas fa-comment-dots fa-lg"></i> Add Comment', 'index.php?p=commslist&comment=' . $data['ban_id'] . '&ctype=C' . $pagelink);
+    $data['addcomment'] = CreateLinkR('<i class="fas fa-comment-dots fa-lg"></i> Add Comment', '/commslist?comment=' . $data['ban_id'] . '&ctype=C' . $pagelink);
+    $data['addcomment_href'] = "/commslist?comment=" . $data['ban_id'] . "&ctype=C" . $pagelink;
     //-----------------------------------
     $data['counts']     = $delimiter . $mutes . $gags;
 
@@ -692,7 +703,7 @@ if ($page > 1) {
     if (isset($_GET['c']) && $_GET['c'] == "comms") {
         $prev = CreateLinkR('<i class="fas fa-arrow-left fa-lg"></i> prev', "javascript:void(0);", "", "_self", false, $prev);
     } else {
-        $prev = CreateLinkR('<i class="fas fa-arrow-left fa-lg"></i> prev', "index.php?p=commslist&page=" . ($page - 1) . (isset($_GET['searchText']) > 0 ? "&searchText=" . $_GET['searchText'] : '' . $advSearchString));
+        $prev = CreateLinkR('<i class="fas fa-arrow-left fa-lg"></i> prev', "/commslist?page=" . ($page - 1) . (isset($_GET['searchText']) > 0 ? "&searchText=" . $_GET['searchText'] : '' . $advSearchString));
     }
 } else {
     $prev = "";
@@ -704,14 +715,14 @@ if ($BansEnd < $BanCount) {
         }
         $next = CreateLinkR('next <i class="fas fa-arrow-right fa-lg"></i>', "javascript:void(0);", "", "_self", false, $nxt);
     } else {
-        $next = CreateLinkR('next <i class="fas fa-arrow-right fa-lg"></i>', "index.php?p=commslist&page=" . ($page + 1) . (isset($_GET['searchText']) ? "&searchText=" . $_GET['searchText'] : '' . $advSearchString));
+        $next = CreateLinkR('next <i class="fas fa-arrow-right fa-lg"></i>', "/commslist?page=" . ($page + 1) . (isset($_GET['searchText']) ? "&searchText=" . $_GET['searchText'] : '' . $advSearchString));
     }
 } else {
     $next = "";
 }
 
 //=================[ Start Layout ]==================================
-$ban_nav = 'displaying&nbsp;' . $BansStart . '&nbsp;-&nbsp;' . $BansEnd . '&nbsp;of&nbsp;' . $BanCount . '&nbsp;results';
+$ban_nav = 'Displaying&nbsp;' . ($BansStart+1) . '&nbsp;-&nbsp;' . $BansEnd . '&nbsp;of&nbsp;' . $BanCount . '&nbsp;results';
 
 if (strlen($prev) > 0) {
     $ban_nav .= ' | <b>' . $prev . '</b>';

@@ -47,17 +47,3 @@ $theme->assign('server_script', $serverscript);
 
 $theme->display('box_admin_comms_search.tpl');
 ?>
-<script type="text/javascript">
-function switch_length(opt)
-{
-    if(opt.options[opt.selectedIndex].value=='other')
-    {
-        $('other_length').setStyle('display', 'block');
-        $('other_length').focus();
-        $('length').setStyle('width', '20px');
-    } else {
-        $('other_length').setStyle('display', 'none');
-        $('length').setStyle('width', '210px');
-    }
-}
-</script>

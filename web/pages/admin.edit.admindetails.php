@@ -273,9 +273,9 @@ if (isset($_POST['adminname'])) {
         if ($ownpwchanged) {
             echo '<script>ShowBox("Admin details updated", "The admin details has been updated successfully", "green", "index.php?p=login");TabToReload();</script>';
         } elseif (isset($rehashing)) {
-            echo '<script>ShowRehashBox("' . implode(",", $allservers) . '", "Admin details updated", "The admin details has been updated successfully", "green", "index.php?p=admin&c=admins");TabToReload();</script>';
+            echo '<script>ShowRehashBox("' . implode(",", $allservers) . '", "Admin details updated", "The admin details has been updated successfully", "green", "/admin?c=admins");TabToReload();</script>';
         } else {
-            echo '<script>ShowBox("Admin details updated", "The admin details has been updated successfully", "green", "index.php?p=admin&c=admins");TabToReload();</script>';
+            echo '<script>ShowBox("Admin details updated", "The admin details has been updated successfully", "green", "/admin?c=admins");TabToReload();</script>';
         }
     }
 } else {

@@ -37,7 +37,7 @@ function LoadServers2($check, $type, $length)
     $objResponse = new xajaxResponse();
     global $userbank, $username;
     if (!$userbank->HasAccess(ADMIN_OWNER | ADMIN_ADD_BAN)) {
-        $objResponse->redirect("index.php?p=login&m=no_access", 0);
+        $objResponse->redirect("/login?m=no_access", 0);
         Log::add("w", "Hacking Attempt", "$username tried to use blockit, but doesn't have access.");
         return $objResponse;
     }
@@ -67,7 +67,7 @@ function BlockPlayer($check, int $sid, $num, $type, int $length)
     global $userbank, $username;
 
     if (!$userbank->HasAccess(ADMIN_OWNER | ADMIN_ADD_BAN)) {
-        $objResponse->redirect("index.php?p=login&m=no_access", 0);
+        $objResponse->redirect("/login?m=no_access", 0);
         Log::add("w", "Hacking Attempt", "$username tried to process a playerblock, but doesnt have access.");
         return $objResponse;
     }

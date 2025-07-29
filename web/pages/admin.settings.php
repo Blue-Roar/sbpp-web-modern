@@ -83,12 +83,12 @@ $list_end   = $list_start + SB_BANS_PER_PAGE;
 $log_count = Log::getCount($where);
 $log       = Log::getAll($list_start, SB_BANS_PER_PAGE,);
 if (($page > 1)) {
-    $prev = CreateLinkR('<i class="fas fa-arrow-left fa-lg"></i> prev', "index.php?p=admin&c=settings" . $searchlink . "&page=" . ($page - 1) . "#^2");
+    $prev = CreateLinkR('<i class="fas fa-arrow-left fa-lg"></i> prev', "/admin?c=settings" . $searchlink . "&page=" . ($page - 1) . "#^2");
 } else {
     $prev = "";
 }
 if ($list_end < $log_count) {
-    $next = CreateLinkR('next <i class="fas fa-arrow-right fa-lg"></i>', "index.php?p=admin&c=settings" . $searchlink . "&page=" . ($page + 1) . "#^2");
+    $next = CreateLinkR('next <i class="fas fa-arrow-right fa-lg"></i>', "/admin?c=settings" . $searchlink . "&page=" . ($page + 1) . "#^2");
 } else {
     $next = "";
 }
@@ -257,7 +257,7 @@ if (!$userbank->HasAccess(ADMIN_OWNER | ADMIN_WEB_SETTINGS)) {
                 ]);
 
 ?>
-<script>ShowBox('Settings updated', 'The changes have been successfully updated', 'green', 'index.php?p=admin&c=settings');</script>
+<script>ShowBox('Settings updated', 'The changes have been successfully updated', 'green', '/admin?c=settings');</script>
 <?php
             } else {
                 print "<script>ShowBox('Error', '$errors', 'red');</script>";
@@ -290,7 +290,7 @@ if (!$userbank->HasAccess(ADMIN_OWNER | ADMIN_WEB_SETTINGS)) {
 
 
 ?>
-<script>ShowBox('Settings updated', 'The changes have been successfully updated', 'green', 'index.php?p=admin&c=settings');</script>
+<script>ShowBox('Settings updated', 'The changes have been successfully updated', 'green', '/admin?c=settings');</script>
 <?php
         }
     }
