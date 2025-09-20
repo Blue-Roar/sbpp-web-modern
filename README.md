@@ -2,6 +2,29 @@
 
 This project is intended for building a more modern web panel for SourceBans. The original projects depends on mootools and have a lot of hardcoded fields in the templates, making it difficult to apply modern frameworks on it.
 
+### This project is currently at a very early stage of development. Many features have yet to be added and malfunctions may happen often.
+
+### It is strongly recommended NOT to deploy this project in a production environment. For migrations, it is strongly recommended to back up your original database and files.
+
+## Additional configuration required
+
+Compared to the original SourceBans++ project, some additional configurations are required.
+
+### URL rewrite rules
+
+`<HOSTNAME>/index.php?p=home` => `<HOSTNAME>/home`
+
+Example nginx config:
+
+```
+location / {
+    if (!-e $request_filename) {
+        rewrite ^/(.+)/?$ /index.php?p=$1 last;
+    }
+    try_files $uri $uri/ /index.php?q=$uri&$args;
+}
+```
+
 Below are contents from the original project
 
 ---
