@@ -1090,8 +1090,15 @@ public void GotDatabase(Database db, const char[] error, any data)
 
 	char query[1024];
 
-	Format(query, sizeof(query), "SET NAMES utf8mb4");
-	DB.Query(ErrorCheckCallback, query);
+	// Set character set to UTF8MB4 in the database
+	// Use SetCharset to ensure charset is set synchronously before any operations
+	if (!DB.SetCharset("utf8mb4"))
+	{
+		LogToFile(logFile, "Failed to set database charset to utf8mb4, trying async method");
+		// Fallback to async method
+		Format(query, sizeof(query), "SET NAMES utf8mb4");
+		DB.Query(ErrorCheckCallback, query);
+	}
 
 	InsertServerInfo();
 
@@ -2467,11 +2474,19 @@ public void InitializeBackupDB()
 
 	SQLiteDB = SQLite_UseDatabase("sourcebans-queue", error, sizeof(error));
 	if (SQLiteDB == INVALID_HANDLE)
+	{
 		SetFailState(error);
+	}
 
-	SQL_LockDatabase(SQLiteDB);
-	SQL_FastQuery(SQLiteDB, "CREATE TABLE IF NOT EXISTS queue (steam_id TEXT PRIMARY KEY ON CONFLICT REPLACE, time INTEGER, start_time INTEGER, reason TEXT, name TEXT, ip TEXT, admin_id TEXT, admin_ip TEXT);");
-	SQL_UnlockDatabase(SQLiteDB);
+	SQLiteDB.Query(ErrorCheckCallback, 
+			"CREATE TABLE IF NOT EXISTS queue ( \
+				steam_id TEXT PRIMARY KEY ON CONFLICT REPLACE, \
+				time INTEGER, \
+				start_time INTEGER, \
+				reason TEXT, \
+				name TEXT, \
+				ip TEXT, \
+				admin_id TEXT, admin_ip TEXT);");
 }
 
 public bool CreateBan(int client, int target, int time, const char[] reason)
